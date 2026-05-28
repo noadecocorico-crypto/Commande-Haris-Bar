@@ -130,7 +130,7 @@ const MENU = [
   { id:3, name:"Spritz",       emoji:"🫧", desc:"Aperol, prosecco, eau gazeuse" },
   { id:4, name:"Cuba Libre",   emoji:"🥤", desc:"Rhum, Coca-Cola, citron vert" },
   { id:5, name:"Coca",         emoji:"🥥", desc:"Coca-Cola" },
-  { id:6, name:"Kebab",        emoji:"🌯", desc:"Personnalise tes garnitures", isKebab: true },
+  { id:7, name:"Kebab",        emoji:"🌯", desc:"Personnalise tes garnitures", isKebab: true },
 ];
 
 const KEBAB_OPTIONS = [
@@ -335,8 +335,8 @@ async function sendOrder() {
     }
   });
 
-  let msg = `🍸 *NOUVELLE COMMANDE*\n`;
-  msg += `👤 Nom : *${customerName}*\n`;
+  let msg = `🍸 NOUVELLE COMMANDE\n`;
+  msg += `👤 Nom : ${customerName}\n`;
   msg += `🕐 Heure : ${time}\n\n`;
   msg += itemsText;
   if (note) msg += `\n📝 Note : ${note}`;
@@ -345,7 +345,7 @@ async function sendOrder() {
     await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chat_id: CHAT_ID, text: msg, parse_mode: "Markdown" })
+      body: JSON.stringify({ chat_id: CHAT_ID, text: msg })
     });
     document.getElementById("done-name").textContent = customerName;
     showScreen("screen-done");
